@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="eu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#FBFAF7">
+<meta name="description" content="MODU piezekin egiturak 3Dn diseinatzeko tresna · Diseña estructuras con piezas MODU · Design builds with MODU pieces">
+<title>MODU Eraikitzailea</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="css/app.css">
+<script type="importmap">
+{"imports":{
+  "three":"./vendor/three.module.min.js",
+  "three/addons/controls/OrbitControls.js":"./vendor/OrbitControls.js"
+}}
+</script>
+</head>
+<body>
+<div id="app">
+  <header>
+    <button id="bSide" class="tb icon narrow-only" data-i18n-title="tb.menu"><i data-ic="menu"></i></button>
+    <div class="logo">MODU<b>.</b><span data-i18n="app.sub"></span></div>
+    <div class="grp">
+      <button id="bUndo" class="tb icon" data-i18n-title="tb.undo"><i data-ic="undo"></i></button>
+      <button id="bRedo" class="tb icon" data-i18n-title="tb.redo"><i data-ic="redo"></i></button>
+    </div>
+    <div class="grp seg" role="group">
+      <button id="bViewP" class="tb" data-i18n="tb.view3d"></button>
+      <button id="bViewT" class="tb" data-i18n="tb.viewTop"></button>
+      <button id="bViewF" class="tb" data-i18n="tb.viewFront"></button>
+    </div>
+    <div class="grp">
+      <button id="bDrop" class="tb" data-i18n-title="tb.dropT"><i data-ic="drop"></i><span data-i18n="tb.drop"></span></button>
+      <button id="bAsm" class="tb" data-i18n-title="tb.asmT"><i data-ic="layers"></i><span data-i18n="tb.asm"></span></button>
+      <button id="bBom" class="tb" data-i18n-title="tb.bom"><i data-ic="list"></i><span data-i18n="tb.bom"></span></button>
+      <button id="bInv" class="tb" data-i18n-title="tb.inv"><i data-ic="box"></i><span data-i18n="tb.inv"></span></button>
+    </div>
+    <span class="spacer"></span>
+    <div class="grp">
+      <button id="bSaves" class="tb" data-i18n-title="tb.files"><i data-ic="folder"></i><span data-i18n="tb.files"></span></button>
+      <button id="bHelp" class="tb icon" data-i18n-title="tb.help"><i data-ic="help"></i></button>
+      <select id="lang" data-i18n-title="tb.lang"></select>
+    </div>
+    <input id="fileIn" type="file" accept=".json,application/json" hidden>
+  </header>
+
+  <aside id="side">
+    <div class="tabs" role="tablist">
+      <button id="tabPieces" role="tab" class="on" data-i18n="tab.pieces"></button>
+      <button id="tabExamples" role="tab" data-i18n="tab.examples"></button>
+    </div>
+    <section id="panePieces">
+      <div id="palette"></div>
+      <p class="note" data-i18n="side.note"></p>
+    </section>
+    <section id="paneExamples" hidden>
+      <label class="search"><i data-ic="search"></i><input id="exSearch" type="search" data-i18n-ph="side.search"></label>
+      <div id="templates"></div>
+    </section>
+  </aside>
+  <div id="scrim"></div>
+
+  <main id="view">
+    <div id="hint"></div>
+    <div id="cx" hidden>
+      <div class="cxg" id="cxRot">
+        <button id="bRotY" data-i18n-title="cx.rotY"><i data-ic="rot"></i><kbd>R</kbd></button>
+        <button id="bRotX" data-i18n-title="cx.rotX"><i data-ic="rot"></i><kbd>T</kbd></button>
+        <button id="bRotZ" data-i18n-title="cx.rotZ"><i data-ic="rot"></i><kbd>Y</kbd></button>
+      </div>
+      <div class="cxg" id="cxPeg">
+        <button id="bLess" data-i18n-title="cx.less"><i data-ic="minus"></i></button>
+        <span id="cxDepth"></span>
+        <button id="bMore" data-i18n-title="cx.more"><i data-ic="plus"></i></button>
+        <button id="bFlip" data-i18n-title="cx.flip"><i data-ic="flip"></i></button>
+      </div>
+      <div class="cxg" id="cxNudge">
+        <button data-nudge="left" data-i18n-title="cx.nudge"><i data-ic="left"></i></button>
+        <button data-nudge="fwd" data-i18n-title="cx.nudge"><i data-ic="up"></i></button>
+        <button data-nudge="back" data-i18n-title="cx.nudge"><i data-ic="down"></i></button>
+        <button data-nudge="right" data-i18n-title="cx.nudge"><i data-ic="right"></i></button>
+        <button data-nudge="up" data-i18n-title="cx.up"><i data-ic="raise"></i></button>
+        <button data-nudge="down" data-i18n-title="cx.down"><i data-ic="lower"></i></button>
+        <button id="bAll" class="txt" data-i18n-title="cx.allT" data-i18n="cx.all"></button>
+      </div>
+      <div class="cxg" id="cxEdit">
+        <button id="bMove" data-i18n-title="cx.move"><i data-ic="move"></i></button>
+        <button id="bDup" data-i18n-title="cx.dup"><i data-ic="copy"></i></button>
+        <button id="bDel" class="danger" data-i18n-title="cx.del"><i data-ic="trash"></i></button>
+      </div>
+      <div class="cxg" id="cxCancel">
+        <button id="bCancel" data-i18n-title="cx.cancel"><i data-ic="x"></i></button>
+      </div>
+    </div>
+    <div id="asmPanel" hidden>
+      <div class="top"><b id="asmTitle"></b><span id="asmStep"></span><span class="spacer"></span>
+        <button id="asmClose" class="tb icon" data-i18n-title="a.close"><i data-ic="x"></i></button></div>
+      <div id="asmBar"><div id="asmFill"></div></div>
+      <div id="asmText"></div>
+      <div class="row">
+        <button id="asmPrev" class="tb"><i data-ic="left"></i><span data-i18n="a.prev"></span></button>
+        <button id="asmPlay" class="tb primary"><i data-ic="play"></i><span id="asmPlayTxt"></span></button>
+        <button id="asmNext" class="tb"><span data-i18n="a.next"></span><i data-ic="right"></i></button>
+        <span class="spacer"></span>
+        <label class="note"><span data-i18n="a.explode"></span> <input type="range" id="asmExplode" min="0" max="100" value="0"></label>
+      </div>
+    </div>
+  </main>
+
+  <footer><span id="stat"></span></footer>
+</div>
+
+<dialog id="dlgBom">
+  <h2 data-i18n="tb.bom"></h2>
+  <div id="bomBody"></div>
+  <div class="row"><button id="bomCopy" class="tb" data-i18n="bom.copy"></button><span class="spacer"></span><button class="tb" data-close data-i18n="d.close"></button></div>
+</dialog>
+
+<dialog id="dlgInv">
+  <h2 data-i18n="tb.inv"></h2>
+  <div id="invBody"></div>
+  <label class="row"><input type="checkbox" id="invUnlimited"> <span data-i18n="inv.unlimited"></span></label>
+  <p class="note" data-i18n="inv.note"></p>
+  <div class="row"><button id="invDefault" class="tb" data-i18n="inv.default"></button><span class="spacer"></span><button class="tb" data-close data-i18n="d.close"></button><button id="invSave" class="tb primary" data-i18n="d.save"></button></div>
+</dialog>
+
+<dialog id="dlgSaves">
+  <h2 data-i18n="tb.files"></h2>
+  <div class="row first"><input type="text" id="saveName" data-i18n-ph="f.name"><button id="saveBtn" class="tb primary" data-i18n="f.saveCur"></button></div>
+  <div id="savesList"></div>
+  <p class="note" data-i18n="f.note"></p>
+  <div class="row">
+    <button id="bExport" class="tb" data-i18n="f.export"></button>
+    <button id="bImport" class="tb" data-i18n="f.import"></button>
+    <button id="bClear" class="tb danger" data-i18n="f.clear"></button>
+    <span class="spacer"></span><button class="tb" data-close data-i18n="d.close"></button>
+  </div>
+</dialog>
+
+<dialog id="dlgHelp">
+  <h2 data-i18n="help.title"></h2>
+  <h3 data-i18n="help.mouse"></h3>
+  <ul>
+    <li data-i18n="help.m1"></li><li data-i18n="help.m2"></li><li data-i18n="help.m3"></li><li data-i18n="help.m4"></li>
+  </ul>
+  <h3 data-i18n="help.keys"></h3>
+  <table class="keys">
+    <tr><td><kbd>R</kbd> <kbd>T</kbd> <kbd>Y</kbd></td><td data-i18n="help.k1"></td></tr>
+    <tr><td><kbd>←</kbd> <kbd>→</kbd> <kbd>↑</kbd> <kbd>↓</kbd> <kbd>PgUp</kbd> <kbd>PgDn</kbd></td><td data-i18n="help.k2"></td></tr>
+    <tr><td><kbd>Q</kbd> <kbd>E</kbd> · <kbd>F</kbd></td><td data-i18n="help.k3"></td></tr>
+    <tr><td><kbd>M</kbd> · <kbd>D</kbd> · <kbd>Del</kbd></td><td data-i18n="help.k4"></td></tr>
+    <tr><td><kbd>G</kbd></td><td data-i18n="help.k5"></td></tr>
+    <tr><td><kbd>Ctrl</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Y</kbd></td><td data-i18n="help.k6"></td></tr>
+  </table>
+  <h3 data-i18n="help.rules"></h3>
+  <ul>
+    <li data-i18n="help.r1"></li><li data-i18n="help.r2"></li><li data-i18n="help.r3"></li><li data-i18n="help.r4"></li><li data-i18n="help.r5"></li>
+  </ul>
+  <p class="note" data-i18n="help.limit"></p>
+  <p class="note" data-i18n="help.install"></p>
+  <div class="row"><span class="spacer"></span><button class="tb" data-close data-i18n="d.close"></button></div>
+</dialog>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
