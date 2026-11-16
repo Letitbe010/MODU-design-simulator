@@ -1,7 +1,7 @@
 {
-  "name": "MODU Eraikitzailea",
-  "short_name": "MODU",
-  "description": "MODU piezekin egiturak 3Dn diseinatzeko tresna.",
+  "name": "Build simulator (unofficial, for the Dreamer Set)",
+  "short_name": "Build sim",
+  "description": "Unofficial 3D build simulator for the MODU Dreamer Set. Not affiliated with MODU.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

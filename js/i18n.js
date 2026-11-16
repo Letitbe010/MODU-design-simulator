@@ -2,8 +2,19 @@
 export const LANGS = [['eu','Euskara'],['es','Español'],['en','English']];
 
 const S = {
-  'app.sub': ['eraikitzailea','constructor','builder'],
-  'app.title': ['MODU Eraikitzailea','Constructor MODU','MODU Builder'],
+  'app.title': ['Eraikuntza-simulatzailea','Simulador de construcciones','Build simulator'],
+  'app.for': ['Dreamer Set-erako','para el Dreamer Set','for the Dreamer Set'],
+
+  // legal and safety notices
+  'legal.badge': ['Ez-ofiziala','No oficial','Unofficial'],
+  'legal.short': ['Proiektu ez-ofiziala, MODUrekin loturarik gabea.','Proyecto no oficial, sin relación con MODU.','Unofficial project, not affiliated with MODU.'],
+  'legal.title': ['Lege-oharra','Aviso legal','Legal notice'],
+  'legal.full': ['Proiektu independente eta ez-ofiziala da, eta ez du MODUrekin inolako loturarik; MODUk ez du onartu edo babesten. MODU, Dreamer Set eta piezen izenak haien jabearenak dira, eta piezak identifikatzeko bakarrik erabiltzen dira. Piezen neurriak eta formak hurbilketak dira. Kodea MIT lizentziapean dago.',
+                 'Es un proyecto independiente y no oficial, sin ninguna relación con MODU, que no lo ha aprobado ni lo respalda. MODU, Dreamer Set y los nombres de las piezas pertenecen a su titular y se usan solo para identificar las piezas. Las medidas y formas de las piezas son aproximaciones. El código tiene licencia MIT.',
+                 'This is an independent, unofficial project. It is not affiliated with, endorsed or sponsored by MODU. MODU, Dreamer Set and the piece names belong to their owner and are used only to identify the pieces. Piece sizes and shapes are approximations. The code is released under the MIT licence.'],
+  'legal.safety': ['Tresnak ez du egonkortasuna egiaztatzen, eta adibideak ez dira pieza errealekin probatu. Heldu batek egiaztatu behar ditu haurrek erabili aurretik.',
+                   'La herramienta no comprueba la estabilidad y los ejemplos no se han probado con piezas reales. Una persona adulta debe revisarlos antes de que los usen niñas y niños.',
+                   'The tool does not check stability, and the examples have not been tested with real pieces. An adult should check every build before children use it.'],
 
   // pieces
   'p.square': ['Block Square','Block Square','Block Square'],

@@ -1,6 +1,12 @@
-# MODU Eraikitzailea
+# Eraikuntza-simulatzailea · Dreamer Set-erako
 
-MODU piezekin (Dreamer Set + 4 Balance Beam) egiturak 3Dn diseinatzeko web aplikazioa, errealitatean muntatu aurretik. Euskaraz, gaztelaniaz eta ingelesez erabil daiteke.
+MODU Dreamer Set-eko piezekin (+ 4 Balance Beam) egiturak 3Dn diseinatzeko web aplikazioa, errealitatean muntatu aurretik. Euskaraz, gaztelaniaz eta ingelesez erabil daiteke.
+
+Aplikazioa: https://letitbe010.github.io/MODU-design-simulator/
+
+> **Proiektu ez-ofiziala.** Ez du MODUrekin inolako loturarik, eta MODUk ez du onartu edo babesten. MODU, Dreamer Set eta piezen izenak haien jabearenak dira, eta piezak identifikatzeko bakarrik erabiltzen dira.
+>
+> **Segurtasuna.** Tresnak ez du egonkortasuna egiaztatzen, eta adibideak ez dira pieza errealekin probatu. Heldu batek egiaztatu behar ditu eraikuntzak haurrek erabili aurretik.
 
 ## Nola ireki
 
@@ -115,5 +121,11 @@ Zulo-patroia produktuaren argazki ofizialetik atera da, perspektiba zuzenduta et
 | `vendor/` | three.js 0.160.0 (cdn.jsdelivr.net-etik kopiatua, 2026-11-12) |
 | `manifest.webmanifest`, `sw.js`, `icons/` | Instalatzeko eta konexiorik gabe erabiltzeko |
 | `abiarazi.bat` | Zerbitzari lokala abiarazteko (Windows) |
+| `LICENSE` | MIT lizentzia |
+| `.nojekyll` | GitHub Pages-ek fitxategiak bere horretan zerbitzatzeko |
 
-Testu bat aldatzeko edo hizkuntza bat gehitzeko, editatu `js/i18n.js` eta `js/templates.js`: sarrera bakoitza `[euskara, gaztelania, ingelesa]` hirukotea da. Fitxategiak aldatu ondoren, igo `sw.js`-ko `CACHE` izenaren bertsioa (`modu-v1` → `modu-v2`), instalatutako aplikazioek cache zaharra garbi dezaten.
+Testu bat aldatzeko edo hizkuntza bat gehitzeko, editatu `js/i18n.js` eta `js/templates.js`: sarrera bakoitza `[euskara, gaztelania, ingelesa]` hirukotea da. Fitxategiak aldatu ondoren, igo `sw.js`-ko `CACHE` izenaren bertsioa (orain `modu-v2`; hurrengoa `modu-v3`), instalatutako aplikazioek cache zaharra garbi dezaten.
+
+## Lizentzia
+
+Kodea [MIT lizentziapean](LICENSE) dago: edonork erabil, aldatu eta bana dezake, egilearen oharra mantenduta. Lizentziak kodea bakarrik hartzen du: MODU, Dreamer Set eta piezen izenak ez dira lizentzia honen parte. `vendor/` karpetako three.js liburutegiak bere MIT lizentzia du, fitxategi bakoitzaren hasieran.

@@ -1,6 +1,6 @@
 // Service worker: lets the app start without a connection.
 // Network first (so an online visit always gets the latest files), cache as fallback.
-const CACHE = 'modu-v1';
+const CACHE = 'modu-v2';
 const SHELL = [
   './', 'index.html', 'css/app.css', 'manifest.webmanifest',
   'js/app.js', 'js/pieces.js', 'js/templates.js', 'js/i18n.js',
